@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux'
@@ -9,7 +9,8 @@ import VideoPlay from '../components/VideoPlay'
 import { fetchData, fetchDetails } from '../queries/FetchData';
 
 const DetailsPage = () => {
-  const params = useParams()
+  const params= useParams()
+ 
   const imageURL = useSelector(state => state.movieData.imageURL)
   const { data} = useQuery({
     queryKey: ['details'],
@@ -40,6 +41,7 @@ const DetailsPage = () => {
     setPlayVideo(true)
 
   }
+  
 
   const duration = (data?.runtime/60)?.toFixed(1)?.split(".")
   const writer = castData?.crew?.filter(el => el?.job === "Writer")?.map(el => el?.name)?.join(", ")
